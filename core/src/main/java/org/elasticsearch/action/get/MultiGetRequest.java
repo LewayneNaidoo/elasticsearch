@@ -325,8 +325,11 @@ public class MultiGetRequest extends ActionRequest implements Iterable<MultiGetR
             } else if (token == XContentParser.Token.START_ARRAY) {
                 if ("docs".equals(currentFieldName)) {
                     parseDocuments(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting, allowExplicitIndex);
-                } else if ("ids".equals(currentFieldName)) {
-                    parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
+			else if ("doc".equals(currentFieldName)){
+				*THROW ERROR MESSAGE
+				}
+                		} else if ("ids".equals(currentFieldName)) {
+                    		parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
                 }
             }
         }
