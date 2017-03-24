@@ -321,12 +321,21 @@ public class MultiGetRequest extends ActionRequest implements Iterable<MultiGetR
         String currentFieldName = null;
         while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
             if (token == XContentParser.Token.FIELD_NAME) {
-                currentFieldName = parser.currentName();
+		if ("docs".equals(parser.currentName()){ // If statement checks if the field entered matches the word "docs"
+		currentFieldName = parser.currentName();// If it does match, it gets saved to currentFieldName and continues	
+		} else if ("doc".equals(parser.currentName()){
+			throw new IllegalArgumentException("Did you mean'docs'?");
+//If it does not match, the program is stopped with an error message that indicates what needs to be changed		
+			}
+                
             } else if (token == XContentParser.Token.START_ARRAY) {
                 if ("docs".equals(currentFieldName)) {
                     parseDocuments(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting, allowExplicitIndex);
-                } else if ("ids".equals(currentFieldName)) {
-                    parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
+			else if ("doc".equals(currentFieldName)){//Stops program with error message if wrong word is used
+				throw new IllegalArgumentException("Did you mean'docs'?");
+				}
+                		} else if ("ids".equals(currentFieldName)) {
+                    		parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
                 }
             }
         }
