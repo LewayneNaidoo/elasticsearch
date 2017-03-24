@@ -324,14 +324,14 @@ public class MultiGetRequest extends ActionRequest implements Iterable<MultiGetR
 		if ("docs".equals(parser.currentName()){
 		currentFieldName = parser.currentName();		
 		} else if ("doc".equals(parser.currentName()){
-			throw new IllegalArgumentException("Please check the spelling of the specified field 'doc'");		
+			throw new IllegalArgumentException("Did you mean'docs'?");		
 			}
                 
             } else if (token == XContentParser.Token.START_ARRAY) {
                 if ("docs".equals(currentFieldName)) {
                     parseDocuments(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting, allowExplicitIndex);
 			else if ("doc".equals(currentFieldName)){
-				throw new IllegalArgumentException("Please check the spelling of the specified field 'doc'");
+				throw new IllegalArgumentException("Did you mean'docs'?");
 				}
                 		} else if ("ids".equals(currentFieldName)) {
                     		parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
