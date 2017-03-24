@@ -326,7 +326,7 @@ public class MultiGetRequest extends ActionRequest implements Iterable<MultiGetR
                 if ("docs".equals(currentFieldName)) {
                     parseDocuments(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting, allowExplicitIndex);
 			else if ("doc".equals(currentFieldName)){
-				*THROW ERROR MESSAGE
+				throw new IllegalArgumentException("Please check the spelling of the specified field");
 				}
                 		} else if ("ids".equals(currentFieldName)) {
                     		parseIds(parser, this.items, defaultIndex, defaultType, defaultFields, defaultFetchSource, defaultRouting);
